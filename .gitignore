@@ -1,0 +1,15 @@
+# 가상환경
+.venv/
+
+# 파이썬 캐시
+__pycache__/
+
+# 실행 중 생성되는 DB와 인스턴스 폴더
+instance/
+*.db
+
+# 환경변수(비밀키 등)
+.env
+
+# macOS
+.DS_Store

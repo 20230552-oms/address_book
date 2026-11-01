@@ -220,3 +220,63 @@ flask --app app run --debug --port 5001
 - debug 모드를 끕니다. debug 모드에서는 오류 화면을 통해 서버 코드를 실행할 수 있습니다.
 - `SECRET_KEY` 환경변수에 추측하기 어려운 값을 넣습니다. 기본값 `"dev"`를 쓰지 않습니다.
 - CSRF 보호를 추가합니다. 지금은 다른 사이트에서 삭제 요청을 보낼 수 있습니다.
+
+
+## 실습 기록 (9주차 Claude 코딩 반복연습)
+
+VS Code + Claude Code로 0단계부터 10단계까지 진행하면서 단계마다 중요하다고 생각한 화면을 캡처했습니다.
+
+### 0단계. 빈 프로젝트 폴더 연결 확인
+Claude에게 열려 있는 폴더를 물어 address_book 폴더가 비어 있다는 답을 받았습니다.
+
+![0단계](screenshots/step00.png)
+
+### 1단계. 요구사항 정리와 계획 (Plan 모드)
+Plan 모드에서 계획만 받았습니다. 계획 문서가 나왔지만 탐색기는 여전히 비어 있습니다.
+
+![1단계](screenshots/step01.png)
+
+### 2단계. 프로젝트 골격 만들기
+templates, static, tests 폴더를 만드는 PowerShell 명령을 실행하기 전에 승인을 요청받은 장면입니다.
+
+![2단계](screenshots/step02.png)
+
+### 3단계. 첫 실행 (Flask)
+app.py를 쓰기 전 승인 화면입니다. 오른쪽 diff에서 `create_app().run(debug=True)` 부분을 확인했습니다.
+
+![3단계](screenshots/step03.png)
+
+### 4단계. SQLite 테이블 만들기
+`flask --app app init-db`로 DB를 초기화했고, instance/addressbook.db에 7개 칸이 만들어진 것을 확인했습니다.
+
+![4단계](screenshots/step04.png)
+
+### 5단계. 등록과 목록 보기
+가짜 연락처 3명(홍길동, 김해사, 이바다)을 등록하고 필수 항목 누락, 정렬, flash 메시지를 확인했습니다.
+
+![5단계](screenshots/step05.png)
+
+### 6단계. 수정과 삭제
+수정·삭제 버튼, 없는 id 접근 시 404, GET으로 삭제 주소 접근 시 405가 나오는 것을 확인했습니다.
+
+![6단계](screenshots/step06.png)
+
+### 7단계. 검색, 입력 검증, 보안 점검
+코드를 고치지 않고 보안 점검만 요청했습니다. SQL이 모두 `?` 파라미터 바인딩을 쓰는 위치를 줄 번호로 짚어 줬습니다.
+
+![7단계](screenshots/step07.png)
+
+### 8단계. 화면 디자인 (CSS)
+style.css를 적용한 뒤 브라우저에서 확인한 목록 화면입니다(검색창, 수정·삭제 버튼).
+
+![8단계](screenshots/step08.png)
+
+### 9단계. pytest 테스트
+conftest.py에서 임시 폴더의 test.db를 쓰도록 해서 실제 DB를 건드리지 않고 테스트를 구성했습니다.
+
+![9단계](screenshots/step09.png)
+
+### 10단계. README와 CLAUDE.md 정리
+README.md를 새로 만들고 CLAUDE.md를 현재 구조에 맞게 갱신했습니다.
+
+![10단계](screenshots/step10.png)

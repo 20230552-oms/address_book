@@ -13,3 +13,6 @@ instance/
 
 # macOS
 .DS_Store
+
+# pytest 캐시
+.pytest_cache/

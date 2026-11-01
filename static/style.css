@@ -1,0 +1,317 @@
+/* ===== 주소록 스타일 (외부 라이브러리 없이 이 파일 하나로 관리) ===== */
+
+/* 자주 쓰는 색을 변수로 모아 둔다. 색을 바꿀 때는 여기만 고치면 된다 */
+:root {
+    --navy: #1f2d4d;        /* 상단 바 남색 */
+    --navy-light: #34466f;  /* 메뉴에 마우스를 올렸을 때 */
+    --blue: #2f6fd6;        /* 기본 버튼, 수정 버튼 */
+    --red: #d63939;         /* 삭제 버튼, 오류 */
+    --green: #2e8b57;       /* 안내(flash) 메시지 */
+    --stripe: #f4f6fa;      /* 표 줄무늬 */
+    --hover: #e3ecfb;       /* 표 줄 강조 */
+    --border: #d9dee7;
+    --text: #222;
+    --muted: #6b7280;
+}
+
+/* 기본 설정: 여백 계산을 쉽게 하고 한글 글꼴을 지정한다 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    color: var(--text);
+    background: #fff;
+    line-height: 1.5;
+}
+
+/* 본문과 상단 바 내용의 최대 폭을 맞추고 가운데에 둔다 */
+main,
+.topbar-inner,
+.flashes {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+main {
+    padding-top: 16px;
+    padding-bottom: 40px;
+}
+
+h2 {
+    margin: 8px 0 16px;
+    font-size: 1.3rem;
+}
+
+/* ===== 상단 바 ===== */
+.topbar {
+    background: var(--navy);
+    color: #fff;
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.topbar h1 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.topbar nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.topbar nav a:hover {
+    background: var(--navy-light);
+}
+
+/* ===== 안내(flash) 메시지: 초록 상자 ===== */
+.flashes {
+    list-style: none;
+    margin-top: 16px;
+}
+
+.flashes li {
+    background: #e8f5ee;
+    color: var(--green);
+    border: 1px solid var(--green);
+    border-left-width: 5px;
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+}
+
+/* ===== 버튼 공통 ===== */
+/* <button>과 <a class="btn">이 똑같이 보이도록 맞춘다 */
+.btn,
+button {
+    display: inline-block;
+    font: inherit;
+    font-size: 0.95rem;
+    padding: 6px 14px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover,
+button:hover {
+    filter: brightness(0.9);
+}
+
+/* 흰 바탕 버튼 (전체 보기, 취소) */
+.btn-outline {
+    background: #fff;
+    color: var(--blue);
+}
+
+/* 표 안의 작은 버튼 */
+.btn-sm {
+    font-size: 0.85rem;
+    padding: 3px 10px;
+}
+
+.btn-delete {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+/* ===== 검색창 ===== */
+.search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.search input {
+    flex: 1;       /* 남는 폭을 검색칸이 모두 차지한다 */
+    min-width: 0;  /* 좁은 화면에서 검색칸이 줄어들 수 있게 한다 (없으면 버튼이 화면 밖으로 밀려난다) */
+}
+
+.result-info,
+.empty {
+    color: var(--muted);
+}
+
+/* ===== 목록 표 ===== */
+.contacts {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.contacts th,
+.contacts td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.contacts th {
+    background: var(--navy);
+    color: #fff;
+    font-weight: normal;
+}
+
+/* 줄무늬: 짝수 번째 줄에 배경색 */
+.contacts tbody tr:nth-child(even) {
+    background: var(--stripe);
+}
+
+/* 마우스를 올린 줄 강조 */
+.contacts tbody tr:hover {
+    background: var(--hover);
+}
+
+/* 수정·삭제 버튼 칸: 줄바꿈 없이 한 줄로 */
+.contacts .actions {
+    white-space: nowrap;
+}
+
+/* 삭제 버튼을 감싼 폼이 수정 버튼 옆에 나란히 오게 한다 */
+.inline-form {
+    display: inline;
+    margin: 0;
+}
+
+/* ===== 입력 폼 ===== */
+input,
+textarea {
+    font: inherit;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 100%;
+}
+
+input:focus,
+textarea:focus {
+    outline: 2px solid var(--blue);
+    border-color: var(--blue);
+}
+
+.contact-form {
+    max-width: 560px;
+}
+
+/* 라벨(왼쪽 7rem) + 입력칸(오른쪽) 두 칸으로 정렬한다 */
+.field {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    align-items: center;
+    column-gap: 12px;
+    margin: 0 0 14px;
+}
+
+/* 오류 메시지는 입력칸 바로 아래(오른쪽 칸)에 붙인다 */
+.field .error {
+    grid-column: 2;
+}
+
+.required {
+    color: var(--red);
+}
+
+/* 오류 메시지: 빨간 글씨 */
+.error,
+.errors {
+    color: var(--red);
+    font-size: 0.9rem;
+}
+
+.errors {
+    background: #fdecec;
+    border-radius: 4px;
+    padding: 10px 14px;
+}
+
+/* 오류가 있는 입력칸은 테두리도 빨갛게 */
+.field.has-error input {
+    border-color: var(--red);
+}
+
+/* 저장·취소 버튼은 입력칸과 같은 위치에서 시작 */
+.form-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: calc(7rem + 12px);
+}
+
+/* ===== 휴대폰 화면 (폭 600px 이하) ===== */
+@media (max-width: 600px) {
+    /* 폼: 라벨을 입력칸 위로 올려 한 줄에 하나씩 */
+    .field {
+        grid-template-columns: 1fr;
+        row-gap: 4px;
+    }
+
+    .field .error {
+        grid-column: 1;
+    }
+
+    .form-actions {
+        margin-left: 0;
+    }
+
+    /* 표: 한 줄을 카드 한 장으로 바꿔 세로로 쌓는다 */
+    .contacts thead {
+        display: none;  /* 제목 줄은 숨기고 각 칸 앞에 data-label로 제목을 붙인다 */
+    }
+
+    .contacts,
+    .contacts tbody,
+    .contacts tr,
+    .contacts td {
+        display: block;
+    }
+
+    .contacts tr {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        margin-bottom: 12px;
+        padding: 6px 0;
+    }
+
+    .contacts td {
+        border-bottom: none;
+        padding: 4px 12px;
+    }
+
+    /* 비어 있는 칸(이메일·주소 없음)은 숨긴다 */
+    .contacts td:empty {
+        display: none;
+    }
+
+    .contacts td::before {
+        content: attr(data-label);
+        display: inline-block;
+        width: 5.5rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+    }
+
+    .contacts .actions {
+        padding-top: 8px;
+    }
+
+    .contacts .actions::before {
+        content: none;  /* 버튼 줄에는 제목을 붙이지 않는다 */
+    }
+}
